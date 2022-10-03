@@ -10,9 +10,27 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    let ballArray = [#imageLiteral(resourceName: "ball1.png"),#imageLiteral(resourceName: "ball2.png"),#imageLiteral(resourceName: "ball3.png"),#imageLiteral(resourceName: "ball4.png"),#imageLiteral(resourceName: "ball5.png")]
-
-
-
+    @IBOutlet weak var ballImageView: UIImageView!
+    let ballImageLiterals = ["ball1", "ball2", "ball3", "ball4", "ball5"]
+    
+    override func viewDidLoad() {
+        refreshImage()
+    }
+    
+    @IBAction func onAskButtonClicked(_ sender: UIButton) {
+        refreshImage()
+    }
+    
+    private func refreshImage() {
+        if let imageLiteralResourceName = ballImageLiterals.randomElement() {
+            ballImageView.image = UIImage(imageLiteralResourceName: imageLiteralResourceName)
+        } else {
+            print("unable to load image")
+        }
+    }
+    
+    override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+        refreshImage()
+    }
 }
 
